@@ -1,17 +1,14 @@
 import re,os
 
 tag_map = {
-    'Urgency': 'UNK',
     'Restraint': 'Tx_Restraint',
     'RiskMed': 'Tx_RiskMed',
     'DisOT': 'Cog_DisOT',
     'LOC': 'Cog_LOC',
     'Aids': 'Mob_Aids',
     'Confusion': 'Cog_Confusion',
-    'Excitement|*': 'UNK',
     'Hearing\\_Imp': 'Sen_Hearing_Imp',   # 백슬래시 없음
-    'Slp\\_\\_Imp': 'Slp_Imp',              # 백슬래시 없음
-    'Excitment': 'UNK',
+    'Slp\\_\\_Imp': 'Slp_Imp',
     'Visual\\_Imp': 'Sen_Visual_Imp',     # 백슬래시 없음
     'Non\\_cooper': 'Beh_Non_cooper',     # 백슬래시 없음
     'Alone': 'Beh_Alone',
@@ -19,11 +16,11 @@ tag_map = {
     'Weak': 'Mob_Weak',
     'P\\_limit': 'Mob_P_limit',           # 백슬래시 없음
     'Dizz': 'Mob_Dizz',
-    'Excitement': 'UNK',
     'Sedatives': 'Slp_Sedatives'
 }
 # 파일 경로 설정
-file_path = 'FallRisk_En_No1.tsv'
+file_name='FallRisk_En_No6'
+file_path = f'FallRisk_En/FallRisk_En/{file_name}.tsv'
 
 # 파일 읽기
 with open(file_path, 'r', encoding='utf-8') as file:
@@ -31,7 +28,7 @@ with open(file_path, 'r', encoding='utf-8') as file:
 # 각 ann_results가 정확히 오프셋이 적용되도록 다시 수정
 
 # ann 파일을 저장할 디렉토리 생성
-output_dir = 'ann'
+output_dir = f'ann/{file_name}'
 os.makedirs(output_dir, exist_ok=True)
 
 ann_lines = []
@@ -48,7 +45,7 @@ for line in lines:
     # Text가 시작되는 줄
     if line.startswith('#Text='):
         if current_text:  # 이전에 있던 Text가 있으면 .ann 파일로 저장
-            ann_results.append((f'FallRisk_En_No_{str(current_text_idx+1).zfill(4)}.ann', ann_lines))
+            ann_results.append((f'{file_name}_{str(current_text_idx+1).zfill(4)}.ann', ann_lines))
             ann_lines = []  # 초기화
             current_text_idx += 1
             token_counter = 1  # T1부터 다시 시작
@@ -88,7 +85,7 @@ for line in lines:
 
 # 마지막 Text에 대한 처리
 if current_text:
-    ann_results.append((f'FallRisk_En_No_{str(current_text_idx+1).zfill(4)}.ann', ann_lines))
+    ann_results.append((f'{file_name}_{str(current_text_idx+1).zfill(4)}.ann', ann_lines))
 
 
 # ann 파일을 ann 디렉토리에 저장
