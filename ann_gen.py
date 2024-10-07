@@ -19,8 +19,8 @@ tag_map = {
     'Sedatives': 'Slp_Sedatives'
 }
 # 파일 경로 설정
-file_name='FallRisk_En_No6'
-file_path = f'FallRisk_En/FallRisk_En/{file_name}.tsv'
+file_name='FallRisk_ko_No5_4361_modified'
+file_path = f'FallRisk_Ko/FallRisk_Ko/{file_name}.tsv'
 
 # 파일 읽기
 with open(file_path, 'r', encoding='utf-8') as file:
