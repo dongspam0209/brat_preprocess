@@ -10,3 +10,5 @@
 - FallRisk_EN_No1.tsv에 존재하는 tag 정보들 추출하는 python file
 - FallRisk_En_No1.tsv  → result.txt
 
+# ko_ann_gen.py
+- FallRisk_Ko_No1.tsv  → FallRisk_Ko_No1_0001~5000.ann
